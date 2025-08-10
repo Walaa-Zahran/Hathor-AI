@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>HathorAI Web App</title>
+    <script>
+      async function getScore() {
+        const wallet = document.getElementById("wallet").value;
+        const res = await fetch("http://127.0.0.1:5000/score", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ wallet }),
+        });
+        const data = await res.json();
+        document.getElementById(
+          "result"
+        ).innerText = `Score: ${data.score} | NFT ID: ${data.nft.token_id}`;
+      }
+    </script>
+  </head>
+  <body>
+    <h2>HathorAI Web App</h2>
+    <input type="text" id="wallet" placeholder="Enter wallet address" >
+    <button type="button" onclick="getScore()">Get Score</button>
+    <p id="result"></p>
+  </body>
+</html>
